@@ -1,7 +1,7 @@
 ---
-title: My notes and views!
+title: Digital Forest
 ---
-Welcome to my digital garden! a living repository of my thoughts and notes as I learn. This space contains personal insights, explanatory diagrams, and mental models.
+Welcome to my digital forest! a living repository of my thoughts and notes as I learn. This space contains personal insights, explanatory diagrams, and mental models.
 
 > [!quote] "All models are wrong, but some are useful." — George Box
 
