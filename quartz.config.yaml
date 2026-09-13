@@ -7,11 +7,12 @@ configuration:
   analytics:
     provider: plausible
   locale: en-US
-  baseUrl: quartz.jzhao.xyz
+  baseUrl: yantraguru.github.io
   ignorePatterns:
     - private
     - templates
     - .obsidian
+    - sources
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
