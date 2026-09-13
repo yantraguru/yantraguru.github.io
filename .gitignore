@@ -12,3 +12,12 @@ replit.nix
 .quartz/
 quartz/cli/tui/dist/
 .turbo/
+
+
+# Private sources and raw documents
+sources/
+content/sources/
+*.pdf
+*.epub
+*.mobi
+*.azw3
