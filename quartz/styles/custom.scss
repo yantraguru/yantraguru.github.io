@@ -1,3 +1,18 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+// The default theme uses a 6rem (~96px) top spacing on the sidebar and
+// page header, which can look like a big empty gap on wider screens.
+// Shrink it to 40px on tablet/desktop (mobile already resets this on its own).
+@media all and not ($mobile) {
+  .page > #quartz-body {
+    .sidebar {
+      padding-top: 40px !important;
+    }
+
+    .page-header {
+      margin-top: 40px !important;
+    }
+  }
+}
