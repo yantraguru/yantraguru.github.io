@@ -21,3 +21,6 @@ content/sources/
 *.epub
 *.mobi
 *.azw3
+
+# EPUB annotation plugin — raw highlight data, not for publishing
+.epub-highlights/

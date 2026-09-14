@@ -10,3 +10,4 @@ Welcome to my digital forest! a living repository of my thoughts and notes as I 
 
 - **[[notes/index|Notes & Snippets]]:** Learnings, quotes, code, examples and observations.
 - **[[views/index|Views & Essays]]:** Synthesis, models, and views.
+- **[[tags/|Browse by Tag]]:** Everything, sliced by topic instead of type.

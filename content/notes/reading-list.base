@@ -1,0 +1,36 @@
+filters:
+  and:
+    - file.hasTag("reading-list")
+formulas:
+  progress: |
+    if(status == "read", "🌱 Read",
+    if(status == "rooted", "🌳 Rooted", "🌰 On the list"))
+properties:
+  title:
+    displayName: Title
+  author:
+    displayName: Author
+  year:
+    displayName: Year
+  formula.progress:
+    displayName: Status
+views:
+  - type: table
+    name: Reading List
+    order:
+      - title
+      - author
+      - year
+      - formula.progress
+    sort:
+      - property: status
+        direction: ASC
+  - type: board
+    name: Reading Board
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - title
+      - author
+      - formula.progress
