@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tag index — compact mockup</title>
+<style>
+  :root {
+    --light: #faf8f8;
+    --lightgray: #e5e5e5;
+    --gray: #b8b8b8;
+    --darkgray: #4e4e4e;
+    --dark: #2b2b2b;
+    --secondary: #284b63;
+    --tertiary: #84a59d;
+    --highlight: rgba(143, 159, 169, 0.15);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--light);
+    color: var(--darkgray);
+    font-family: -apple-system, "Source Sans Pro", sans-serif;
+    padding: 2.5rem 1.5rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  h1 {
+    font-family: Georgia, serif;
+    color: var(--dark);
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+  }
+  .note {
+    color: var(--gray);
+    font-size: 0.85rem;
+    margin-bottom: 2rem;
+  }
+  .view { display: none; }
+  .view.active { display: block; }
+  .tag-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.55rem 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
+  .tag-row:hover { background: var(--highlight); }
+  .tag-name {
+    font-weight: 600;
+    color: var(--secondary);
+  }
+  .tag-name::before {
+    content: "#";
+    color: var(--tertiary);
+    margin-right: 0.15rem;
+  }
+  .tag-count {
+    color: var(--gray);
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .tag-list { border-top: 1px solid var(--lightgray); }
+  .tag-list .tag-row { border-bottom: 1px solid var(--lightgray); }
+
+  .back {
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    color: var(--secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .back:hover { text-decoration: underline; }
+
+  .note-row {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .note-row:hover { background: var(--highlight); }
+  .note-title {
+    color: var(--secondary);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .note-meta {
+    color: var(--gray);
+    font-size: 0.8rem;
+    margin-top: 0.1rem;
+  }
+  .note-list { border-top: 1px solid var(--lightgray); }
+  .note-list .note-row { border-bottom: 1px solid var(--lightgray); }
+
+  .caption {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: var(--gray);
+    border-top: 1px dashed var(--lightgray);
+    padding-top: 1rem;
+  }
+</style>
+</head>
+<body>
+
+  <div id="tags-view" class="view active">
+    <h1>Tags</h1>
+    <div class="note">Illustrative — counts and extra tags are placeholders to show how this scales.</div>
+    <div class="tag-list">
+      <a class="tag-row" onclick="showTag('writing', 1)"><span class="tag-name">writing</span><span class="tag-count">1</span></a>
+      <a class="tag-row" onclick="showTag('reading-list', 1)"><span class="tag-name">reading-list</span><span class="tag-count">1</span></a>
+      <a class="tag-row" onclick="showTag('systems-thinking', 4)"><span class="tag-name">systems-thinking</span><span class="tag-count">4</span></a>
+      <a class="tag-row" onclick="showTag('energy', 3)"><span class="tag-name">energy</span><span class="tag-count">3</span></a>
+      <a class="tag-row" onclick="showTag('economics', 2)"><span class="tag-name">economics</span><span class="tag-count">2</span></a>
+      <a class="tag-row" onclick="showTag('mind', 1)"><span class="tag-name">mind</span><span class="tag-count">1</span></a>
+    </div>
+  </div>
+
+  <div id="tag-detail-view" class="view">
+    <a class="back" onclick="showTags()">&larr; All tags</a>
+    <h1 id="tag-detail-title">#writing</h1>
+    <div class="note" id="tag-detail-count">1 note</div>
+    <div class="note-list" id="tag-detail-list">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <div class="caption">
+    Click a tag to see how the drill-down feels: tag directory &rarr; note headers &rarr; (in the real site) the note itself.
+  </div>
+
+<script>
+  const notesByTag = {
+    "writing": [{title: "On Writing Well", meta: "Sep 14, 2026"}],
+    "reading-list": [{title: "On Writing Well", meta: "Sep 14, 2026"}],
+    "systems-thinking": [
+      {title: "Leverage Points", meta: "placeholder"},
+      {title: "Feedback Loops in Org Incentives", meta: "placeholder"},
+      {title: "Stocks vs. Flows", meta: "placeholder"},
+      {title: "Thinking in Systems (notes)", meta: "placeholder"},
+    ],
+    "energy": [
+      {title: "Heat Pump Economics", meta: "placeholder"},
+      {title: "Winter Pilot Rate Breakeven", meta: "placeholder"},
+      {title: "Grid Flexibility Notes", meta: "placeholder"},
+    ],
+    "economics": [
+      {title: "Incentive Design", meta: "placeholder"},
+      {title: "Market Failures Primer", meta: "placeholder"},
+    ],
+    "mind": [{title: "Attention as a Scarce Resource", meta: "placeholder"}],
+  };
+
+  function showTag(tag, count) {
+    document.getElementById('tags-view').classList.remove('active');
+    document.getElementById('tag-detail-view').classList.add('active');
+    document.getElementById('tag-detail-title').textContent = '#' + tag;
+    document.getElementById('tag-detail-count').textContent = count + (count === 1 ? ' note' : ' notes');
+    const list = document.getElementById('tag-detail-list');
+    list.innerHTML = '';
+    (notesByTag[tag] || []).forEach(n => {
+      const a = document.createElement('a');
+      a.className = 'note-row';
+      a.href = '#';
+      a.innerHTML = '<div class="note-title">' + n.title + '</div><div class="note-meta">' + n.meta + '</div>';
+      list.appendChild(a);
+    });
+  }
+
+  function showTags() {
+    document.getElementById('tag-detail-view').classList.remove('active');
+    document.getElementById('tags-view').classList.add('active');
+  }
+</script>
+
+</body>
+</html>
