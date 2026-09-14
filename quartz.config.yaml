@@ -205,6 +205,7 @@ plugins:
     enabled: true
     options:
       links:
+        Tags: /tags/
         GitHub: https://github.com/yantraguru
         LinkedIn: https://www.linkedin.com/in/adwaitbhave/
     layout:
